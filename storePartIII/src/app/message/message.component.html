@@ -1,0 +1,7 @@
+<div class="bg-info text-white p-2 text-center" *ngIf="lastMessage" [class.bg-danger]="lastMessage.error">
+  <h4>{{lastMessage.text}}</h4>
+</div>
+
+<div class="text-center my-2">
+  <button *ngFor="let resp of lastMessage?.responses; let i = index;" class="btn btn-primary m-2" [class.btn-secondary]="i>0" (click)="resp[1](resp[0])">{{resp[0]}}</button>
+</div>

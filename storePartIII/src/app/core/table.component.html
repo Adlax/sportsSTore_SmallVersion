@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-auto">
+      <button class="btn btn-secondary btn-block" [routerLink]="['/table']" routerLinkActive="bg-primary" [routerLinkActiveOptions]="{exact:true}">All</button>
+      <button *ngFor="let category of categories" class="btn btn-secondary btn-block px-3" [routerLink]="['/table',category]" routerLinkActive="bg-primary">{{category}}</button>
+    </div>
+    <div class="col">
+      <button class="btn btn-info mx-1" routerLink="products">Products Count</button>
+      <button class="btn btn-info mx-1" routerLink="categories">Categories Count</button>
+      <button class="btn btn-info mx-1" routerLink="/table">No Count</button>
+      <div class="my-2">
+        <router-outlet></router-outlet>
+      </div>
+      <table class="table table-sm table-bordered table-striped">
+        <thead>
+          <tr> <th></th> <th>Name</th> <th>Category</th> <th>Price</th> <th></th> </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of getProducts()">
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.price | currency:"USD"}}</td>
+            <td>
+              <button class="btn btn-danger btn-sm mr-1" (click)="deleteProduct(product.id)">Delete</button>
+              <button class="btn btn-warning btn-sm" [routerLink]="['/form', 'edit', product.id]">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="p-2 text-center">
+  <button class="btn btn-primary m-1" [routerLink]="['/form', 'create']">Create New Product</button>
+  <button class="btn btn-danger m-1" (click)="deleteProduct(-1)">Generate an error</button>
+  <button class="btn btn-danger m-1" routerLink='/does/not/exist'>Generate a routing error</button>
+  <button class="btn btn-danger m-1" routerLink='/ondemand'>Access OnDemand Section</button>
+  <!-- <button class="btn btn-danger m-1" (click)="categories">run function</button> -->
+  <!-- [routerLink]="['/form', 'edit', product.id, {name:product.name,category:product.category,price:product.price}]" -->
+</div>
